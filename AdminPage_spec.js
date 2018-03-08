@@ -232,6 +232,7 @@ describe('Navigate to Admin Page', function() {
 				element(by.buttonText('Next')).click();
 				browser.sleep(10000);
 				
+				//Header UI Validation
 				element(by.xpath("//wfa-user-editor-header//div//div//div[1]//strong")).getText().then(function(header2){
 					console.log("The header of the Manage User Permissions Page 2 is " + header2);
 					browser.sleep(10000);
@@ -345,11 +346,87 @@ describe('Navigate to Admin Page', function() {
 				    	expect(paginationUI).toEqual('Step 2 of 3');	
 				    	browser.sleep(1000);
 				    });
-			
-			});
-		});
 
-	
-	
+			});
+			
+			
+                  it("Verify the UI on the Manage User Permissions page  Scenario 1", function(){
+		    	
+                	  element(by.buttonText('Next')).click();
+  					browser.sleep(1000);
+  					
+  					//To verify UI for toggle switches
+  				    var toggle1 = element(by.xpath("//wfa-permissions-setup//div//wfa-data-level-access-selector//div//div[1]//wfa-toggle-switch//label//span"));
+  				    toggle1.click();
+  				    expect(toggle1.isSelected());
+  				    browser.sleep(10000);
+  					
+  					
+  					//To verify the UI for the Radio Button on the page 
+  					
+  					element(by.xpath("//div[1]/wfa-form-radio/label/p")).getText().then(function(firstRadiobtnText){
+  						console.log(firstRadiobtnText);
+  						expect(firstRadiobtnText).toEqual('All Company Data');
+  						browser.sleep(2000);
+  					});
+  					
+  					element(by.xpath("//div[2]/wfa-form-radio/label/p")).getText().then(function(secondRadiobtnText){
+  						console.log(secondRadiobtnText);
+  						expect(secondRadiobtnText).toEqual('Manager Hierarchy');
+  						browser.sleep(2000);
+  					});
+  					
+  					element(by.xpath("//div[3]/wfa-form-radio/label/p")).getText().then(function(thirdRadiobtnText){
+  						console.log(thirdRadiobtnText);
+  						expect(thirdRadiobtnText).toEqual('By Location Only');
+  						browser.sleep(2000);
+  					});
+  					
+  					element(by.xpath("//div[5]//wfa-form-radio//label")).getText().then(function(fourthRadiobtnText){
+  						console.log(fourthRadiobtnText);
+  						expect(fourthRadiobtnText).toEqual('By Department Only');
+  						browser.sleep(2000);
+  					});
+  					
+  					// Radio Button Selection
+  						var button1 = element(by.xpath("//wfa-data-authorization-access-selector//div//div[1]//wfa-form-radio//label//div"));
+  						expect(button1.isSelected());
+  						browser.sleep(10000);
+  					
+  					
+  					    var button2 = element(by.xpath("//wfa-data-authorization-access-selector//div//div[2]//wfa-form-radio//label//div"));
+  						button2.click();
+  						expect(button2.isSelected());
+  						browser.sleep(1000);
+  					
+  					
+  					     var button3 = element(by.xpath("//wfa-data-authorization-access-selector//div//div[3]//wfa-form-radio//label//div"));			
+  						 button3.click();
+  					     expect(button3.isSelected());
+  					     browser.sleep(1000);
+  					
+  					
+  					    var button4 = element(by.xpath("//wfa-data-authorization-access-selector//div//div[5]//wfa-form-radio//label//div"));
+  					    button4.click();	
+  					    expect(button4.isSelected());
+  					    browser.sleep(1000);
+   
+  					    //To Validate the pagination UI
+  					    element(by.css('.step-indicator')).getText().then(function(paginationUI){
+  					    	console.log(paginationUI);
+  					    	expect(paginationUI).toEqual('Step 2 of 3');	
+  					    	browser.sleep(1000);
+  					    });
+				
+                  
+				
+		    });
+			
+			
+			
+			
+			
+			
+		});
 });
 		
